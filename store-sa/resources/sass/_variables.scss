@@ -1,7 +1,13 @@
+@font-face { font-family: "Quicksand"; src: url("../fonts/Quicksand-Regular.woff2"); }
+@font-face { font-family: "QuicksandMedium"; src: url("../fonts/Quicksand-Medium.woff2"); }
+@font-face { font-family: "QuicksandLight"; src: url("../fonts/Quicksand-Light.woff2"); }
+@font-face { font-family: "QuicksandSemiBold"; src: url("../fonts/Quicksand-SemiBold.woff2"); }
+@font-face { font-family: "QuicksandBold"; src: url("../fonts/Quicksand-Bold.woff2"); }
+
 // Body
 $body-bg: #f8fafc;
 
 // Typography
-$font-family-sans-serif: 'Nunito', sans-serif;
+$font-family-sans-serif: 'Quicksand', sans-serif;
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;
