@@ -15,6 +15,15 @@ return new class extends Migration
     {
         Schema::create('productos', function (Blueprint $table) {
             $table->id();
+            $table->string("NoSerie",500)->unique();
+            $table->string("Nombre",250);
+            $table->string("Descripcion", 500);
+            $table->string("Caracteristicas",500);
+            $table->decimal("Precio");
+            $table->integer("Descuento");
+
+            $table->foreignId("IDMarca")->constrained("marcas");
+            $table->foreignId("IDCategoria")->constrained("categorias");
             $table->timestamps();
         });
     }

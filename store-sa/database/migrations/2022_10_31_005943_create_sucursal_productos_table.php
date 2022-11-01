@@ -13,8 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('detalle_facturas', function (Blueprint $table) {
+        Schema::create('sucursal_productos', function (Blueprint $table) {
             $table->id();
+            $table->integer("Existencia");
+
+            $table->foreignId("IDSucursal")->constrained("sucursals");
+            $table->foreignId("IDProducto")->constrained("productos");
             $table->timestamps();
         });
     }
@@ -26,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('detalle_facturas');
+        Schema::dropIfExists('sucursal_productos');
     }
 };

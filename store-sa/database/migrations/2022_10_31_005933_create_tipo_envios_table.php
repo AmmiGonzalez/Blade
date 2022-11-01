@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('tipo_envios', function (Blueprint $table) {
             $table->id();
+            $table->string("Nombre", 200);
+
             $table->timestamps();
         });
     }
