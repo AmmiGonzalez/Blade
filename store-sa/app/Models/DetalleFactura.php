@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class DetalleFactura extends Model
 {
     use HasFactory;
+    protected $table = "detalle_facturas";
+    protected $fillable = [
+        "Subtotal",
+        "Cantidad"
+    ];
+
+    public function encabezado_sucursal()
+    {
+        return $this->belongsTo(encabezado_facturas::class, 'IDEncabezadoFactura');
+        return $this->belongsTo(sucursal_productos::class, 'IDSucursalProducto');
+    }
 }
