@@ -1,0 +1,57 @@
+.home {
+
+  header {
+    .registerText {
+      margin: 2rem 0;
+      padding: 1rem;
+      border-radius: 15px;
+      text-align: center;
+      background-color: rgba(225, 255, 245, 0.897);
+      a { font-size: 1.2rem; }
+    }
+
+    .registeredText {
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      margin: 2rem 0;
+      padding: 1rem;
+      border-radius: 15px;
+      text-align: center;
+      background-color: rgba(225, 255, 245, 0.897);
+      i { margin: 1rem; font-size: 3rem; }
+      h4 {margin: 0;}
+    }
+
+    .warningText {
+      @media (max-width: 768px) {
+        & {
+          display: flex; flex-direction: column; justify-content: center; align-items: center;
+        }
+      }
+      display: flex; justify-content: center; align-items: center;
+      margin: 2rem 0;
+      padding: 1rem;
+      border-radius: 15px;
+      text-align: center;
+      background-color: rgba(255, 250, 181, 0.897);
+      i { margin: 1rem; font-size: 2rem; }
+      h4 {margin: 0;}
+    }
+  }
+
+  main {
+    .Products {
+      .title {
+        .icon {
+          font-size: 2rem;
+          margin-right: 1.25rem;
+        }
+      }
+    }
+  }
+
+  .imageContainer {
+    margin: 1rem 0;
+    i { font-size: 6rem; }
+  }
+
+}

@@ -1,5 +1,7 @@
 @import "./Navbar.scss";
+
 @import './Login/Login.scss';
+@import "./Home/Home.scss";
 
 // Fonts
 @import url('https://fonts.bunny.net/css?family=Nunito');
@@ -15,6 +17,32 @@
 @import '../../node_modules/@fortawesome/fontawesome-free/scss/regular.scss';
 @import '../../node_modules/@fortawesome/fontawesome-free/scss/brands.scss';
 
-html, body {
+html, body, #app {
   font-size: 1rem;
+  height: 100%;
+}
+#app { display: flex; flex-direction: column; }
+.app {
+  display: flex; flex-direction: column;
+  overflow-y: overlay;
+  height: 100%;
+}
+
+.defult-bxshadow { box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1); }
+
+.btn-primary {
+  background-color: var(--bs-teal);
+  border-color: #1fc090;
+  &:hover { background-color: #1cbb8b !important; border-color: #1fb185 !important; }
+  &:active { background-color: #1ec492 !important; border-color: #27b88c !important; }
+}
+.form-control, .form-check-input {
+  &:focus {
+    border-color: #82ffda !important;
+    box-shadow: 0 0 0 0.25rem #20ffbc40;
+  }
+}
+.form-check-input:checked {
+  background-color: var(--bs-teal);
+  border-color: #1fc090;
 }

@@ -7,14 +7,14 @@
             <div class="card">
                 <div class="card-header d-flex align-items-center justify-content-center">
                     <i class="fa-solid fa-user mx-2"></i>
-                    {{ __('Registro de nuevo usuario') }}
+                    {{ __('Nuevo usuario') }}
                 </div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
-                        <div class="row mb-3">
+                        <div class="row mb-3 align-items-center">
                             <div class="input-label col-md-4 col-form-label text-md-end">
                                 <i class="fa-solid fa-user-astronaut"></i>
                                 <label for="username">{{ __('Nombre de usuario') }}</label>
@@ -31,7 +31,7 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3">
+                        <div class="row mb-3 align-items-center">
                             <div class="input-label col-md-4 col-form-label text-md-end">
                                 <i class="fa-solid fa-envelope"></i>
                                 <label for="email">{{ __('Email') }}</label>
@@ -48,10 +48,10 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3">
+                        <div class="row mb-3 align-items-center">
                             <div class="input-label col-md-4 col-form-label text-md-end">
                                 <i class="fa-solid fa-lock"></i>
-                                <label for="password">{{ __('Password') }}</label>
+                                <label for="password">{{ __('Contraseña') }}</label>
                             </div>
 
                             <div class="col-md-6">
@@ -65,7 +65,7 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3">
+                        <div class="row mb-3 align-items-center">
                             <div class="input-label col-md-4 col-form-label text-md-end">
                                 <i class="fa-solid fa-check-double"></i>
                                 <label for="password-confirm">{{ __('Confirm Password') }}</label>
@@ -76,10 +76,10 @@
                             </div>
                         </div>
 
-                        <div class="row mb-0">
+                        <div class="row mb-0 align-items-center">
                             <div class="col-md-6 offset-md-4 text-center">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
+                                    {{ __('Registrarse') }}
                                 </button>
                             </div>
                         </div>
