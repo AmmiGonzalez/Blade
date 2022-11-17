@@ -22,12 +22,12 @@ return new class extends Migration
             $table->string("Caracteristicas",500);
             $table->decimal("Precio");
             $table->integer("Descuento");
+            $table->string("PathImagen", 1000);
 
             $table->foreignId("IDMarca")->constrained("marcas");
             $table->foreignId("IDCategoria")->constrained("categorias");
             $table->timestamps();
         });
-        DB::statement("ALTER TABLE productos ADD RefImagen MEDIUMBLOB");
     }
 
     /**

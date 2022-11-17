@@ -12,7 +12,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <!-- Scripts -->
     @vite(['resources/js/app.js'])
 </head>
@@ -50,7 +50,7 @@
                             @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link d-flex flex-row align-items-center justify-content-center" href="{{ route('register') }}">
-                                        <i class="fa-solid fa-square-plus mx-2"></i>
+                                        <i class="fa-solid fa-user-plus mx-2"></i>
                                         {{ __('Registrarse') }}
                                     </a>
                                 </li>
@@ -68,17 +68,24 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="n1">
-                                    <a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ route('home') }}">
-                                        <i class="fa-solid fa-print"></i>
-                                        {{ __('Cotización') }}
-                                    </a>
+                                    @if (Auth::user()->IDRol == 2 || Auth::user()->IDRol == 3)
+                                        <a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ route('home') }}">
+                                            <i class="fa-solid fa-gauge-high"></i>
+                                            {{ __('Dashboard') }}
+                                        </a>
+                                    @endif
+                                    @if(Auth::user()->IDRol == 1)
+                                        <a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ route('home') }}">
+                                            <i class="fa-solid fa-print"></i>
+                                            {{ __('Cotización') }}
+                                        </a>
+                                    @endif
                                     <a class="dropdown-item d-flex align-items-center justify-content-center" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         <i class="fa-solid fa-right-to-bracket"></i>
                                         {{ __('Cerrar sesión') }}
                                     </a>
-
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
@@ -95,7 +102,7 @@
                 <div class="collapse navbar-collapse">
                     <ul class="navbar-nav">
                         <li class="nav-item mx-2">
-                            <a class="nav-link d-flex flex-row align-items-center justify-content-center" href="{{ route('home') }}"> <i class="fa-solid fa-robot mx-2"></i> {{ __('Domótica') }} </a>
+                            <a class="nav-link d-flex flex-row align-items-center justify-content-center" href="{{ route('ver.productos') }}"> <i class="fa-solid fa-boxes-stacked mx-2"></i> {{ __('Productos') }} </a>
                         </li>
                         {{-- <li class="nav-item mx-2">
                             <a class="nav-link d-flex flex-row align-items-center justify-content-center" href="{{ route('home') }}"><i class="fa-solid fa-headphones-simple mx-2"></i> {{ __('Audio') }} </a>

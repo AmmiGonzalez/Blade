@@ -10,7 +10,9 @@ class Distribucion extends Model
     use HasFactory;
     protected $table = "distribucions";
     protected $fillable = [
-        "Fecha"
+        "Fecha",
+        "IDProducto",
+        "IDDistribuidor"
     ];
 
     public function productos_distribuidores()

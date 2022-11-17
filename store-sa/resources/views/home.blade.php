@@ -13,8 +13,8 @@
                 @if (Route::has('login'))
                     <div class="registerText">
                         <h4>Para poder realizar compras debe estár registrado en nuestra aplicación</h4>
-                        <a class="btn btn-primary mx-2 mt-4"><i class="fa-solid fa-right-to-bracket"></i> Iniciar sesión</a>
-                        <a class="btn btn-primary mx-2 mt-4"><i class="fa-solid fa-plus-square"></i> ¡Registrarse gratis!</a>
+                        <a href="/login" class="btn btn-primary mx-2 mt-4"><i class="fa-solid fa-right-to-bracket"></i> Iniciar sesión</a>
+                        <a href="/register" class="btn btn-primary mx-2 mt-4"><i class="fa-solid fa-plus-square"></i> ¡Registrarse gratis!</a>
                     </div>
                 @endif
                 @else
