@@ -1,0 +1,12 @@
+.reportesContainer {
+  a{
+    font-size: 1.25rem;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    margin: 1rem 0;
+    color: black;
+    &:hover { scale: 1.01; }
+    &:active { scale: 1; }
+    transition: all ease-in-out 125ms;
+  }
+}

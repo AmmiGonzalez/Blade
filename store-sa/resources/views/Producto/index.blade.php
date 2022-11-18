@@ -19,10 +19,16 @@
         </a>
         <div class="product-footer mt-auto d-flex flex-row align-items-center justify-content-start">
           <h5 class="card-title"><b>Q{{$producto->Precio}}</b></h5>
-          @if (Auth::user()->IDRol >= 2)
-            <button onclick="window.location='{{ route('editar.producto', $producto) }}'" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></button>
-            <button data-product-nombre="{{$producto->Nombre}}" data-product-id="{{$producto->id}}" class="btn btn-danger delete" data-bs-toggle="modal" data-bs-target="#deleteProduct"><i class="fa-solid fa-trash-can"></i></button>
-          @endif
+          @guest
+            @if(Route::has('login'))
+            @endif
+            @else
+              @if (Auth::user()->IDRol >= 2)
+                <button onclick="window.location='{{ route('editar.producto', $producto) }}'" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></button>
+                <button data-product-nombre="{{$producto->Nombre}}" data-product-id="{{$producto->id}}" class="btn btn-danger delete" data-bs-toggle="modal" data-bs-target="#deleteProduct"><i class="fa-solid fa-trash-can"></i></button>
+                <button onclick="window.location='{{ route('agregarExistencia.producto', $producto) }}'" class="btn btn-info" ><i class="fa-solid fa-plus"></i></button>
+              @endif
+          @endguest
         </div>
       </div>
     @endforeach

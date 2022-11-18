@@ -1,0 +1,26 @@
+.dashboardContainer {
+  .section {
+    margin: 0;
+    padding: 0 2rem;
+    .title {
+      background-color: #ffffff;
+      padding: 0 5rem;
+      box-shadow: 0px 0px 24px 1px rgba(0,0,0,0.05);
+      border-radius: 10px;
+    }
+  }
+  .option {
+    padding: 1rem 0rem;
+    text-decoration: none;
+    color: black;
+    i {
+      font-size: 2.25rem;
+    }
+    .card-body {
+      padding-bottom: 0;
+    }
+    &:hover { color: #29573a; scale: 1.02; }
+    &:active { scale: 1; }
+    transition: all ease-in-out 125ms;
+  }
+}

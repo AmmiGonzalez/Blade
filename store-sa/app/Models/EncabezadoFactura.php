@@ -14,6 +14,8 @@ class EncabezadoFactura extends Model
         'Direccion',
         'Email',
         'Telefono',
+        'IDTipo_envio',
+        'IDUsuario'
     ];
     public function detalle_clientes()
     {

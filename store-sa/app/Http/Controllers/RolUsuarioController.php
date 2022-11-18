@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Producto;
 use App\Models\RolUsuario;
 use Illuminate\Http\Request;
 
 class RolUsuarioController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware("rol:1");
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +19,7 @@ class RolUsuarioController extends Controller
      */
     public function index()
     {
-        //
+        return view("Dashboard.index");
     }
 
     /**

@@ -121,6 +121,37 @@ class ProductoController extends Controller
         //return session()->all();
     }
 
+    public function addExistencias(Request $request, Producto $producto)
+    {
+        return view("Producto.addExistencias", [
+            "producto" => $producto,
+            "sucursales" => Sucursal::all()
+        ]);
+    }
+
+    public function storeExistencias(Request $request)
+    {
+        $sucursal = SucursalProducto::where("IDProducto", "=", $request->IDProducto)
+            ->where("IDSucursal", "=", $request->IDSucursal)->get();
+
+        if(count($sucursal) == 0)
+        {
+            $validated = $request->validate([
+                'Existencia' => "required|min:1",
+                'IDProducto' => "required",
+                'IDSucursal' => "required",
+            ]);
+            
+            $sucursal = SucursalProducto::create($validated);
+        }
+        else
+        {
+            $sucursal[0]->Existencia += $request->Existencia;
+            $sucursal[0]->save();
+        }
+        return back()->with("status", "Se agregaron las existencias correctamente");
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

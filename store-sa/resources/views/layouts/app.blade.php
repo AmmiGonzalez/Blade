@@ -68,18 +68,38 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="n1">
-                                    @if (Auth::user()->IDRol == 2 || Auth::user()->IDRol == 3)
-                                        <a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ route('home') }}">
-                                            <i class="fa-solid fa-gauge-high"></i>
-                                            {{ __('Dashboard') }}
-                                        </a>
-                                    @endif
-                                    @if(Auth::user()->IDRol == 1)
-                                        <a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ route('home') }}">
-                                            <i class="fa-solid fa-print"></i>
-                                            {{ __('Cotización') }}
-                                        </a>
-                                    @endif
+                                    <div class="text-center d-flex align-items-center justify-content-center">
+                                        <h5 class="my-2" href="{{ route('home') }}">
+                                            <b>{{ Auth::user()->username }}</b>
+                                        </h5>
+                                    </div>
+                                    @switch(Auth::user()->IDRol)
+                                        @case(1)
+                                            <a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ route('home') }}">
+                                                <i class="fa-solid fa-print"></i>
+                                                {{ __('Cotización') }}
+                                            </a>
+                                            @break
+                                        @case(2)
+                                            <a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ route('inicio.reportes') }}">
+                                                <i class="fa-solid fa-clipboard-list"></i>
+                                                {{ __('Reportes') }}
+                                            </a>
+                                            <a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ route('inicio.dashboard') }}">
+                                                <i class="fa-solid fa-gauge-high"></i>
+                                                {{ __('Dashboard') }}
+                                            </a>
+                                            @break
+                                        @case(3)
+                                            <a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ route('inicio.dashboard') }}">
+                                                <i class="fa-solid fa-gauge-high"></i>
+                                                {{ __('Dashboard') }}
+                                            </a>
+                                            @break
+                                        @default
+                                            
+                                    @endswitch
+                                    
                                     <a class="dropdown-item d-flex align-items-center justify-content-center" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
