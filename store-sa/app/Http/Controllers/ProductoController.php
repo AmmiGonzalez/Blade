@@ -106,12 +106,24 @@ class ProductoController extends Controller
             "IDSucursal" => "required",
             "NoProductos" => "required",
         ]);
+        /*
+        VERIFICANDO QUE A CANTIDAD DE PRODUCTOS PARA AÑADIR AL
+        CARRO NO SUPERE LA EXISTENCIA EN LA SUCURSAL SELECCIONADA
+        */
+        if($request->input('submitted') == 'addToCart')
+        {
+            $sucursalProducto = SucursalProducto::
+            where('IDProducto', '=', $producto->id)
+            ->where('IDSucursal', '=', $request->IDSucursal)->get()[0];
+            if($sucursalProducto->Existencia < $request->NoProductos)
+                return back()->with('error', 'Cantidad superior a la existencia');
+        }
         
         if(!session()->has("cart")) session()->put("cart", []);
         if(!session()->has("quotation")) session()->put("quotation", []);
 
         $res = array_merge($validated, $producto->toArray());
-
+        
         if($request->input("submitted") == "addToCart")
             session()->push('cart', $res);
         else 

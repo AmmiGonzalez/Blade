@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ReportesContoller;
@@ -28,6 +29,22 @@ Auth::routes();
 Route::controller(HomeController::class)->group(function(){
     Route::get('/home', 'index')->name('home');
     Route::get('/', 'index')->name('home');
+});
+
+Route::controller(CarritoController::class)->group(function(){
+    Route::get('/carrito', 'index')->name('inicio.carrito');
+    
+    Route::get('/cotizacion', 'cotizacion')->name('inicio.cotizacion');
+    
+
+    Route::get('/carrito/confirmar', 'pagarCarro')->name('confirmar.carrito');
+    Route::post('/carrito/efectuarCompra', 'buy')->name('realizarCompra.carrito');
+    Route::get('/carrito/pagoExitoso', function() {
+        return view('Carrito.paymentSuccess');
+    })->name('pagoExitoso.carrito');
+
+    Route::delete('/carrito/eliminarItem/{itemIndex}', 'deleteItem')->name('eliminarItem.carrito');
+    Route::delete('/carrito/vaciarCarrito', 'deleteAll')->name('vaciar.carrito');
 });
 
 Route::controller(RolUsuarioController::class)->group(function(){

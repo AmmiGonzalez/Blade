@@ -11,7 +11,9 @@ class DetalleFactura extends Model
     protected $table = "detalle_facturas";
     protected $fillable = [
         "Subtotal",
-        "Cantidad"
+        "Cantidad",
+        "IDEncabezadoFactura",
+        "IDSucursalProducto"
     ];
 
     public function encabezado_sucursal()

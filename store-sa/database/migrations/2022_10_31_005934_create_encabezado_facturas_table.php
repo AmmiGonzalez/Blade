@@ -15,10 +15,14 @@ return new class extends Migration
     {
         Schema::create('encabezado_facturas', function (Blueprint $table) {
             $table->id();
-            $table->string("Serie",500)->unique();
             $table->date("FechaCompra");
             $table->decimal("Total");
-
+            $table->string("NombreCompleto", 250);
+            $table->string("DireccionEnvio", 300);
+            $table->bigInteger("Telefono");
+            $table->bigInteger("NIT");
+            
+            $table->foreignId("IDDepartamento")->constrained("departamentos");
             $table->foreignId("IDTipoEnvio")->constrained("tipo_envios");
             $table->timestamps();
         });

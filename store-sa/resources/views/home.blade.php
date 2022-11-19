@@ -32,8 +32,10 @@
     <main>
         <div class="Products container-fluid d-flex flex-column">
             <div class="title d-flex align-items-center justify-content-center text-center">
-                <div class="icon"><i class="fa-solid fa-tag"></i></div>
-                <h3>¡Algunos de nuestros productos!</h3>
+                <a class="btn btn-primary icon" href="{{route('ver.productos')}}">
+                    <i class="fa-solid fa-tag"></i>
+                    ¡Algunos de nuestros productos!
+                </a>
             </div>
         </div>
     </main>

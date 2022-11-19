@@ -10,12 +10,14 @@ class EncabezadoFactura extends Model
     use HasFactory;
     protected $table = "encabezado_facturas";
     protected $fillable = [
-        'Nombre',
-        'Direccion',
-        'Email',
+        'FechaCompra',
+        'Total',
+        'NombreCompleto',
+        'DireccionEnvio',
         'Telefono',
-        'IDTipo_envio',
-        'IDUsuario'
+        'NIT',
+        'IDTipoEnvio',
+        'IDDepartamento'
     ];
     public function detalle_clientes()
     {

@@ -22,7 +22,7 @@
           <div class="mt-4 row">
             <h5>{{$producto->Descripcion}}</h5>
           </div>
-          <div class="mt-3 row">
+          <div class="my-3 row">
             <b>Características: </b>
             <h5>{{$producto->Caracteristicas}}</h5>
           </div>
@@ -32,24 +32,29 @@
               <div class="col-8 offset-2">
                 <select id="storeSelector" class="form-select" name="IDSucursal">
                   @foreach ($sucursales as $sucursal)
-                    <option value="{{$sucursal->IDSucursal}}">{{$sucursal->sucursal->Nombre}}: {{$sucursal->Existencia}}</option>
+                    @if ($sucursal->Existencia >= 1)
+                      <option value="{{$sucursal->IDSucursal}}">{{$sucursal->sucursal->Nombre}}: {{$sucursal->Existencia}}</option>
+                    @endif
                   @endforeach
                 </select>
               </div>
             </div>
+          @else <b class="text-red"> sin existencia </b>
           @endif
           <div class="mt-3 row">
-            <b>Cantidad:
-              @if (count($sucursales) == 0)
-                <b class="text-red"> sin existencia </b>
-              @endif
-            </b>
+            <b>Cantidad:</b>
           </div>
-          @if (count($sucursales) >= 1)
-            <div class="my-3 row">
-              <div class="col-2"><button onclick="substractProduct()" type="button" class="btn btn-dark"><i class="fa-solid fa-minus"></i></button></div>
-              <div class="col-2"><button onclick="addProduct()" type="button" class="btn btn-dark"><i class="fa-solid fa-plus"></i></button></div>
-              <div class="col-4"><input id="productCounter" min="1" class="form-control" name="NoProductos" type="number" value="1"/></div>
+          <div class="my-3 row">
+            <div class="col-2"><button onclick="substractProduct()" type="button" class="btn btn-dark"><i class="fa-solid fa-minus"></i></button></div>
+            <div class="col-2"><button onclick="addProduct()" type="button" class="btn btn-dark"><i class="fa-solid fa-plus"></i></button></div>
+            <div class="col-4"><input id="productCounter" min="1" class="form-control" name="NoProductos" type="number" value="1"/></div>
+          </div>
+
+          @if (session("error"))
+            <div class="row my-4">
+              <div class="col-md-8 offset-2">
+                <small class="bg-danger bg-opacity-50 px-3 py-2 rounded">{{session('error')}}</small>
+              </div>
             </div>
           @endif
           @if (session("status"))

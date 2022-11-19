@@ -40,6 +40,12 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
+                                    <a class="nav-link d-flex flex-row align-items-center justify-content-center" href="{{ route('inicio.cotizacion') }}">
+                                        <i class="fa-solid fa-print mx-2"></i>
+                                        {{ __('Cotizar') }}
+                                    </a>
+                                </li>
+                                <li class="nav-item">
                                     <a class="nav-link d-flex flex-row align-items-center justify-content-center" href="{{ route('login') }}">
                                         <i class="fa-solid fa-right-to-bracket mx-2"></i>
                                         {{ __('Iniciar sesión') }}
@@ -57,8 +63,9 @@
                             @endif
                         @else
                             <li class="nav-item mx-2">
-                                <a class="nav-link d-flex flex-row align-items-center justify-content-center" href="{{ route('home') }}">
+                                <a class="cartIcon nav-link d-flex flex-row align-items-center justify-content-center" href="{{ route('inicio.carrito') }}">
                                     <i class="fa-solid fa-basket-shopping mx-2"></i>
+                                    @include('layouts.partials.carritoIndicator')
                                     {{ __('Carrito') }}
                                 </a>
                             </li>
@@ -75,7 +82,7 @@
                                     </div>
                                     @switch(Auth::user()->IDRol)
                                         @case(1)
-                                            <a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ route('home') }}">
+                                            <a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ route('inicio.cotizacion') }}">
                                                 <i class="fa-solid fa-print"></i>
                                                 {{ __('Cotización') }}
                                             </a>

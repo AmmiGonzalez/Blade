@@ -61,7 +61,7 @@
                         <div class="row mb-3">
                           <div class="input-label col-md-4 col-form-label text-md-end"> <i class="fa-solid fa-image"></i> <label for="ImagenActual">{{ __('Imagen') }}</label> </div>
                           <div class="col-md-6">
-                            <div class="d-flex flex-col algin-items-center justify-content-center col-md-6">
+                            <div class="d-flex flex-col algin-items-center justify-content-center">
                               <img class="miniature" src="{{asset('storage/'.$producto->PathImagen)}}"/>
                             </div>
                           </div>

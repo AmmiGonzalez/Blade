@@ -6,6 +6,7 @@
 @import "../views/Producto/producto.scss";
 @import "../views/Dashboard/dashboard.scss";
 @import "../views/Reportes/reportes.scss";
+@import "../views/Carrito/carrito.scss";
 // Fonts
 @import url('https://fonts.bunny.net/css?family=Nunito');
 
@@ -57,3 +58,25 @@ textarea { resize: none; }
   background-color: var(--bs-teal);
   border-color: #1fc090;
 }
+
+/*APP STYLES*/
+.cartIcon {
+  position: relative;
+  &:hover { .cartIndicator { background-color: #b2f5d3; } }
+  .cartIndicator {
+    position: absolute;
+    right: 80%;
+    bottom: 30%;
+    background-color: #b3ffd9;
+    border-radius: 20px;
+    font-size: 12px;
+    padding: 0.25rem 0.6rem;
+    p { margin: 0; }
+  }
+  @media (max-width: 768px) {
+    .cartIndicator {
+      right: 56.5%;
+     }
+  }
+}
+/*----------*/
