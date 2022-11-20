@@ -26,7 +26,11 @@
             <b>Características: </b>
             <h5>{{$producto->Caracteristicas}}</h5>
           </div>
-          @if (count($sucursales) >= 1)
+          @php
+              $any = false;
+              foreach($sucursales as $sucursal) if($sucursal->Existencia >= 1) $any = true;
+          @endphp
+          @if (count($sucursales) >= 1 && $any)
             <div class="mt-3 row"> <b>Seleccione la tienda: </b> </div>
             <div class="mt-2 row">
               <div class="col-8 offset-2">
@@ -74,16 +78,15 @@
             </div>
           @endif
           @else
-            <button
-              id="addToCart"
-              type="submit"
-              name="submitted"
-              value="addToCart"
-              class="btn btn-primary mr"
-              @if (count($sucursales) == 0)
-                hidden
-              @endif
-            ><i class="fa-solid fa-shopping-bag mr"></i>Añadir al carro</button>
+            @if (count($sucursales) >= 1 && $any)
+              <button
+                id="addToCart"
+                type="submit"
+                name="submitted"
+                value="addToCart"
+                class="btn btn-primary mr"
+              ><i class="fa-solid fa-shopping-bag mr"></i>Añadir al carro</button>
+            @endif
         @endguest
         <button name="submitted" value="addToQuotation" type="submit" class="btn btn-secondary"><i class="fa-solid fa-receipt mr"></i>Agregar a lista de cotización</button>
       </div>
@@ -105,34 +108,4 @@
     if(value >= 2) document.getElementById("productCounter").value = value - 1;
   }
 </script>
-{{-- <script>
-
-  $(document).ready(function() {
-
-      window.cart = <?php echo json_encode($cart) ?>;
-      console.log($("#addToCart"))
-      $('#addToCart').on('click', function(event) {
-          $(this).value = "selected";
-          var cart = window.cart || [];
-          cart.push(
-            {
-              'id':$(this).data('id'),
-              'nombre':$(this).data('nombre'),
-              'precio':$(this).data('precio'),
-              'pathImageen':$(this).data('imagen'),
-              'cantidad':$("#productCounter").val()
-            });
-          window.cart = cart;
-          console.log(cart);
-          /*$.ajax('/productos/agregarAlCarro', {
-              type: 'POST',
-              data: {"_token": "{{ csrf_token() }}", "cart":cart},
-              success: function (data, status, xhr) {
-
-              }
-          });*/
-      });
-  })
-
-</script> --}}
 @endsection

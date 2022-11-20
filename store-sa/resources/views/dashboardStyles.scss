@@ -1,0 +1,40 @@
+.contentList {
+  height: 100%;
+  overflow-y: overlay;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  display: flex;
+  margin-bottom: 0.5rem;
+  position: relative;
+  .row { margin: 0 2rem; height: fit-content; }
+  .card {
+    a{
+      margin-top: 1rem;
+      text-decoration: none;
+      color: black;
+      .img-container {
+        display: flex; flex-direction: row;
+        align-items: center; justify-content: center;
+        height: 14rem;
+        i {
+          font-size: 5rem;
+        }
+      }
+    }
+    .content-footer {
+      padding: 1rem;
+      .btn {
+        padding: 0.5rem 0.75rem;
+        margin-left: 0.6rem;
+      }
+    }
+    &:hover:not(&:hover.btn-danger) { a { color: #2f8851; } scale: 1.01; }
+    &:active { scale: 1; }
+    transition: all ease-in-out 125ms;
+  }
+  .modal {
+    i {
+      font-size: 1.5rem;
+    }
+  }
+}

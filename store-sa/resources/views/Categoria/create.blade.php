@@ -6,12 +6,12 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header d-flex align-items-center justify-content-center">
-                    <i class="fa-solid fa-box mx-2"></i>
-                    {{ __('Editar categoria') }}
+                    <i class="fa-solid fa-shapes mx-2"></i>
+                    {{ __('Crear categoria') }}
                 </div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('actualizar.categoria') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('guardar.categoria') }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="row mb-3">

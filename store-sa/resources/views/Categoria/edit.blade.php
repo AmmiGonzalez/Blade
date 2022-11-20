@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header d-flex align-items-center justify-content-center">
-                    <i class="fa-solid fa-box mx-2"></i>
+                    <i class="fa-solid fa-shapes mx-2"></i>
                     {{ __('Editar categoria') }}
                 </div>
 

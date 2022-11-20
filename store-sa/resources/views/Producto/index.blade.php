@@ -61,7 +61,6 @@
   $('.delete').on('click', function() {
     selectedProduct = $(this).data("product-id");
     $("#modalProductName").text($(this).data("product-nombre"));
-    console.log("HOLA BOTON: " + selectedProduct);
   });
 
   $('#btnDelete').on('click', function() {

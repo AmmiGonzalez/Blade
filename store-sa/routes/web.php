@@ -97,6 +97,6 @@ Route::controller(CategoriaController::class)->group(function(){
     Route::get("/categorias/editar/{categoria}", "edit")->name("editar.categoria");
     Route::put("/categorias/editar/{categoria}", "update")->name("actualizar.categoria");
     Route::delete("/categorias/eliminar/{id}", "destroy")->name("eliminar.categoria");
-    Route::get("/categorias/{producto}", "show")->name("mostrar.categoria");
+    Route::get("/categorias/{categoria}", "show")->name("mostrar.categoria");
 
 });

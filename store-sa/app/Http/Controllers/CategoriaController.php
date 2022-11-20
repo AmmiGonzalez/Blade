@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class CategoriaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware("rol:1");
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +18,7 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-        //
+        return view("Categoria.index", ["categorias" => Categoria::all()]);
     }
 
     /**
@@ -54,7 +58,7 @@ class CategoriaController extends Controller
      */
     public function show(Categoria $categoria)
     {
-        //
+        return view("Categoria.show", ["categoria" => $categoria]);
     }
 
     /**
