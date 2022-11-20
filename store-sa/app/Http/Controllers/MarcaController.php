@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class MarcaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware("rol:1");
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +18,7 @@ class MarcaController extends Controller
      */
     public function index()
     {
-        //
+        return view("Marca.index", ["marcas" => Marca::all()]);
     }
 
     /**
@@ -24,7 +28,9 @@ class MarcaController extends Controller
      */
     public function create()
     {
-        //
+        return view("Marca.create", [
+            "marca" => new Marca()
+        ]);
     }
 
     /**
@@ -35,7 +41,14 @@ class MarcaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            "Nombre" => "required|min:5|max:250",
+            "Email" => "required|min:5|max:500",
+            "Telefono" => "required|min:5|max:500",
+        ]);
+        Marca::create($validated);
+
+        return back()->with("status", "Se creó la marca correctamente");
     }
 
     /**
@@ -46,7 +59,7 @@ class MarcaController extends Controller
      */
     public function show(Marca $marca)
     {
-        //
+        return view("Marca.show", ["marca" => $marca]);
     }
 
     /**
@@ -57,7 +70,9 @@ class MarcaController extends Controller
      */
     public function edit(Marca $marca)
     {
-        //
+        return view("Marca.edit", [
+            "marca" => $marca
+        ]);
     }
 
     /**
@@ -69,7 +84,15 @@ class MarcaController extends Controller
      */
     public function update(Request $request, Marca $marca)
     {
-        //
+        $validated = $request->validate([
+            "Nombre" => "required|min:5|max:250",
+            "Email" => "required|min:5|max:500",
+            "Telefono" => "required|min:8|max:8"
+        ]);
+
+        $marca->update($validated);
+
+        return back()->with("status", "Se actualizó la marca correctamente");
     }
 
     /**
@@ -78,8 +101,9 @@ class MarcaController extends Controller
      * @param  \App\Models\Marca  $marca
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Marca $marca)
+    public function destroy($id)
     {
-        //
+        $marca = Marca::find($id);
+        $marca->delete();
     }
 }

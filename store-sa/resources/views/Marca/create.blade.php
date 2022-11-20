@@ -6,12 +6,12 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header d-flex align-items-center justify-content-center">
-                    <i class="fa-solid fa-shapes mx-2"></i>
-                    {{ __('Crear categoria') }}
+                    <i class="fa-solid fa-registered mx-2"></i>
+                    {{ __('Crear marca') }}
                 </div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('guardar.categoria') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('guardar.marca') }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="row mb-3">
@@ -21,7 +21,7 @@
                             </div>
                         
                             <div class="col-md-6">
-                                <input id="Nombre" type="text" class="form-control @error('Nombre') is-invalid @enderror" name="Nombre" value="{{ old('Nombre', $categoria->Nombre) }}" required autocomplete="Nombre" autofocus>
+                                <input id="Nombre" type="text" class="form-control @error('Nombre') is-invalid @enderror" name="Nombre" value="{{ old('Nombre', $marca->Nombre) }}" required autocomplete="Nombre" autofocus>
 
                                 @error('Nombre')
                                     <span class="invalid-feedback" role="alert">
@@ -33,15 +33,31 @@
                         <div class="row mb-3">
                             <div class="input-label col-md-4 col-form-label text-md-end">
                                 <i class="fa-solid fa-font"></i>
-                                <label for="Descripcion">{{ __('Descripcion') }}</label>
+                                <label for="Email">{{ __('Email') }}</label>
                             </div>
                         
                             <div class="col-md-6">
-                                <input id="Descripcion" type="text" class="form-control @error('Descripcion') is-invalid @enderror" name="Descripcion" value="{{ old('Descripcion', $categoria->Descripcion) }}" required autocomplete="Descripcion" autofocus>
+                                <input id="Email" type="text" class="form-control @error('Email') is-invalid @enderror" name="Email" value="{{ old('Email', $marca->Email) }}" required autocomplete="Email" autofocus>
 
-                                @error('Descripcion')
+                                @error('Email')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>La descripción debe tener al menos 5 carácteres</strong>
+                                        <strong>El formato de Email no es correcto</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="input-label col-md-4 col-form-label text-md-end">
+                                <i class="fa-solid fa-font"></i>
+                                <label for="Telefono">{{ __('Teléfono') }}</label>
+                            </div>
+                        
+                            <div class="col-md-6">
+                                <input id="Telefono" type="text" class="form-control @error('Telefono') is-invalid @enderror" name="Telefono" value="{{ old('Telefono', $marca->Telefono) }}" required autocomplete="Telefono" autofocus>
+
+                                @error('Telefono')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>El teléfono debe tener 8 carácteres</strong>
                                     </span>
                                 @enderror
                             </div>

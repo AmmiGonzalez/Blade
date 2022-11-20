@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Producto;
 use App\Models\RolUsuario;
 use Illuminate\Http\Request;
 
@@ -19,7 +18,7 @@ class RolUsuarioController extends Controller
      */
     public function index()
     {
-        return view("Dashboard.index");
+        return view("Dashboard.index",["roles" => RolUsuario::all()]);
     }
 
     /**
@@ -29,7 +28,9 @@ class RolUsuarioController extends Controller
      */
     public function create()
     {
-        //
+        return view("Rol.create", [
+            "rolUsuario" => new RolUsuario()
+        ]);
     }
 
     /**
@@ -40,7 +41,12 @@ class RolUsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            "Nombre" => "required|min:5|max:250"
+        ]);
+        RolUsuario::create($validated);
+
+        return back()->with("status", "Se creó el rol correctamente");
     }
 
     /**
@@ -51,7 +57,7 @@ class RolUsuarioController extends Controller
      */
     public function show(RolUsuario $rolUsuario)
     {
-        //
+        return view("Rol.show", ["rolUsuario" => $rolUsuario]);
     }
 
     /**
@@ -60,9 +66,12 @@ class RolUsuarioController extends Controller
      * @param  \App\Models\RolUsuario  $rolUsuario
      * @return \Illuminate\Http\Response
      */
+    /* El segundo parámetros (con signo de dolar) es el que se indica en la ruta  */
     public function edit(RolUsuario $rolUsuario)
     {
-        //
+        return view("Rol.edit", [
+            "rolUsuario" => $rolUsuario
+        ]);
     }
 
     /**
@@ -74,7 +83,13 @@ class RolUsuarioController extends Controller
      */
     public function update(Request $request, RolUsuario $rolUsuario)
     {
-        //
+        $validated = $request->validate([
+            "Nombre" => "required|min:5|max:250"
+        ]);
+
+        $rolUsuario->update($validated);
+
+        return back()->with("status", "Se actualizó el rol correctamente");
     }
 
     /**
@@ -83,8 +98,9 @@ class RolUsuarioController extends Controller
      * @param  \App\Models\RolUsuario  $rolUsuario
      * @return \Illuminate\Http\Response
      */
-    public function destroy(RolUsuario $rolUsuario)
+    public function destroy($id)
     {
-        //
+        $rolUsuario = RolUsuario::find($id);
+        $rolUsuario->delete();
     }
 }

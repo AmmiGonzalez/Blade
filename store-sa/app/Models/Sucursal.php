@@ -13,6 +13,7 @@ class Sucursal extends Model
         'Direccion',
         'Nombre',
         'Ubicacion',
+        'IDMunicipio'
     ];
     public function sucursal_municipio()
     {

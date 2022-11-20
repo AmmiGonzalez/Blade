@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class DistribuidorController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware("rol:1");
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +18,7 @@ class DistribuidorController extends Controller
      */
     public function index()
     {
-        //
+        return view("Distribuidor.index", ["distribuidores" => Distribuidor::all()]);
     }
 
     /**
@@ -24,7 +28,9 @@ class DistribuidorController extends Controller
      */
     public function create()
     {
-        //
+        return view("Distribuidor.create", [
+            "distribuidor" => new Distribuidor()
+        ]);
     }
 
     /**
@@ -35,7 +41,15 @@ class DistribuidorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            "Nombre" => "required|min:5|max:250",
+            "Direccion" => "required|min:5|max:500",
+            "Email" => "required|min:5|max:500",
+            "Telefono" => "required|min:8|max:8"
+        ]);
+        Distribuidor::create($validated);
+
+        return back()->with("status", "Se creó el distribuidor correctamente");
     }
 
     /**
@@ -46,7 +60,7 @@ class DistribuidorController extends Controller
      */
     public function show(Distribuidor $distribuidor)
     {
-        //
+        return view("Distribuidor.show", ["distribuidor" => $distribuidor]);
     }
 
     /**
@@ -57,7 +71,9 @@ class DistribuidorController extends Controller
      */
     public function edit(Distribuidor $distribuidor)
     {
-        //
+        return view("Distribuidor.edit", [
+            "distribuidor" => $distribuidor
+        ]);
     }
 
     /**
@@ -69,7 +85,16 @@ class DistribuidorController extends Controller
      */
     public function update(Request $request, Distribuidor $distribuidor)
     {
-        //
+        $validated = $request->validate([
+            "Nombre" => "required|min:5|max:250",
+            "Direccion" => "required|min:5|max:500",
+            "Email" => "required|min:5|max:500",
+            "Telefono" => "required|min:8|max:8"
+        ]);
+
+        $distribuidor->update($validated);
+
+        return back()->with("status", "Se actualizó la categoría correctamente");
     }
 
     /**
@@ -78,8 +103,9 @@ class DistribuidorController extends Controller
      * @param  \App\Models\Distribuidor  $distribuidor
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Distribuidor $distribuidor)
+    public function destroy($id)
     {
-        //
+        $distribuidor = Distribuidor::find($id);
+        $distribuidor->delete();
     }
 }

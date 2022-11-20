@@ -6,14 +6,14 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header d-flex align-items-center justify-content-center">
-                    <i class="fa-solid fa-shapes mx-2"></i>
-                    {{ __('Crear categoria') }}
+                    <i class="fa-solid fa-hammer mx-2"></i>
+                    {{ __('Editar rol') }}
                 </div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('guardar.categoria') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('actualizar.rol', $rolUsuario) }}" enctype="multipart/form-data">
+                        @method("PUT")
                         @csrf
-
                         <div class="row mb-3">
                             <div class="input-label col-md-4 col-form-label text-md-end">
                                 <i class="fa-solid fa-hashtag"></i>
@@ -21,27 +21,11 @@
                             </div>
                         
                             <div class="col-md-6">
-                                <input id="Nombre" type="text" class="form-control @error('Nombre') is-invalid @enderror" name="Nombre" value="{{ old('Nombre', $categoria->Nombre) }}" required autocomplete="Nombre" autofocus>
+                                <input id="Nombre" type="text" class="form-control @error('Nombre') is-invalid @enderror" name="Nombre" value="{{ old('Nombre', $rolUsuario->Nombre) }}" required autocomplete="Nombre" autofocus>
 
                                 @error('Nombre')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>El nombre debe tener al menos 5 carácteres</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="input-label col-md-4 col-form-label text-md-end">
-                                <i class="fa-solid fa-font"></i>
-                                <label for="Descripcion">{{ __('Descripcion') }}</label>
-                            </div>
-                        
-                            <div class="col-md-6">
-                                <input id="Descripcion" type="text" class="form-control @error('Descripcion') is-invalid @enderror" name="Descripcion" value="{{ old('Descripcion', $categoria->Descripcion) }}" required autocomplete="Descripcion" autofocus>
-
-                                @error('Descripcion')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>La descripción debe tener al menos 5 carácteres</strong>
+                                        <strong>El nombre debe tener al menos 5 dígitos</strong>
                                     </span>
                                 @enderror
                             </div>
@@ -57,7 +41,7 @@
                         <div class="row mb-0">
                             <div class="col-md-8 offset-md-6">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Crear') }}
+                                    {{ __('Editar') }}
                                 </button>
                             </div>
                         </div>

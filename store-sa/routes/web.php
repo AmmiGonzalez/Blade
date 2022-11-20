@@ -6,6 +6,10 @@ use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ReportesContoller;
 use App\Http\Controllers\RolUsuarioController;
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\MarcaController;
+use App\Http\Controllers\DistribuidorController;
+use App\Http\Controllers\SucursalController;
+use App\Http\Controllers\UsuarioController;
 use App\Models\Producto;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -53,6 +57,16 @@ Route::controller(CarritoController::class)->group(function(){
 
 Route::controller(RolUsuarioController::class)->group(function(){
     Route::get('/dashboard', 'index')->name('inicio.dashboard');
+
+    Route::get("/roles/index", "index")->name("ver.rol");
+
+    Route::get("/roles/crear", "create")->name("crear.rol");
+    Route::post("/roles/crear", "store")->name("guardar.rol");
+    /* La variable entre llaves se obtiene del controlador */
+    Route::get("/roles/editar/{rolUsuario}", "edit")->name("editar.rol");
+    Route::put("/roles/editar/{rolUsuario}", "update")->name("actualizar.rol");
+    Route::delete("/roles/eliminar/{id}", "destroy")->name("eliminar.rol");
+    Route::get("/roles/{rolUsuario}", "show")->name("mostrar.rol");
 });
 
 Route::controller(ReportesContoller::class)->group(function(){
@@ -98,5 +112,52 @@ Route::controller(CategoriaController::class)->group(function(){
     Route::put("/categorias/editar/{categoria}", "update")->name("actualizar.categoria");
     Route::delete("/categorias/eliminar/{id}", "destroy")->name("eliminar.categoria");
     Route::get("/categorias/{categoria}", "show")->name("mostrar.categoria");
-
 });
+
+Route::controller(MarcaController::class)->group(function(){
+    Route::get("/marcas", "index")->name("ver.marca");
+
+    Route::get("/marcas/crear", "create")->name("crear.marca");
+    Route::post("/marcas/crear", "store")->name("guardar.marca");
+
+    Route::get("/marcas/editar/{marca}", "edit")->name("editar.marca");
+    Route::put("/marcas/editar/{marca}", "update")->name("actualizar.marca");
+    Route::delete("/marcas/eliminar/{id}", "destroy")->name("eliminar.marca");
+    Route::get("/marcas/{marca}", "show")->name("mostrar.marca");
+});
+
+Route::controller(DistribuidorController::class)->group(function(){
+    Route::get("/distribuidores", "index")->name("ver.distribuidor");
+
+    Route::get("/distribuidores/crear", "create")->name("crear.distribuidor");
+    Route::post("/distribuidores/crear", "store")->name("guardar.distribuidor");
+
+    Route::get("/distribuidores/editar/{distribuidor}", "edit")->name("editar.distribuidor");
+    Route::put("/distribuidores/editar/{distribuidor}", "update")->name("actualizar.distribuidor");
+    Route::delete("/distribuidores/eliminar/{id}", "destroy")->name("eliminar.distribuidor");
+    Route::get("/distribuidores/{distribuidor}", "show")->name("mostrar.distribuidor");
+});
+
+Route::controller(SucursalController::class)->group(function(){
+    Route::get("/sucursales", "index")->name("ver.sucursal");
+
+    Route::get("/sucursales/crear", "create")->name("crear.sucursal");
+    Route::post("/sucursales/crear", "store")->name("guardar.sucursal");
+
+    Route::get("/sucursales/editar/{sucursal}", "edit")->name("editar.sucursal");
+    Route::put("/sucursales/editar/{sucursal}", "update")->name("actualizar.sucursal");
+    Route::delete("/sucursales/eliminar/{id}", "destroy")->name("eliminar.sucursal");
+    Route::get("/sucursales/{sucursal}", "show")->name("mostrar.sucursal");
+});
+
+/* Route::controller(UsuarioController::class)->group(function(){
+    Route::get("/usuarios", "index")->name("ver.usuario");
+
+    Route::get("/usuarios/crear", "create")->name("crear.usuario");
+    Route::post("/usuarios/crear", "store")->name("guardar.usuario");
+
+    Route::get("/usuarios/editar/{usuario}", "edit")->name("editar.usuario");
+    Route::put("/usuarios/editar/{usuario}", "update")->name("actualizar.usuario");
+    Route::delete("/usuarios/eliminar/{id}", "destroy")->name("eliminar.usuario");
+    Route::get("/usuarios/{usuario}", "show")->name("mostrar.usuario");
+}); */
