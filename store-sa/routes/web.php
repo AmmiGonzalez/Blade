@@ -35,6 +35,9 @@ Route::controller(CarritoController::class)->group(function(){
     Route::get('/carrito', 'index')->name('inicio.carrito');
     
     Route::get('/cotizacion', 'cotizacion')->name('inicio.cotizacion');
+    Route::delete('/cotizacion/eliminarItem/{itemIndex}', 'deleteItemCotizacion')->name('eliminarItem.cotizacion');
+    Route::delete('/carrito/vaciarCotizacion', 'deleteAllCotizacion')->name('vaciar.cotizacion');
+    
     
 
     Route::get('/carrito/confirmar', 'pagarCarro')->name('confirmar.carrito');
@@ -67,6 +70,9 @@ Route::controller(ReportesContoller::class)->group(function(){
 
 Route::controller(ProductoController::class)->group(function() {
     Route::get("/productos", "index")->name("ver.productos");
+
+    Route::get("/productos/busqueda", "searchFor")->name("buscar.productos");
+    Route::get("/productos/categoria", "searchForCategory")->name("buscarCategoria.productos");
     
     Route::get("/productos/crear", "create")->name("crear.producto");
     Route::post("/productos/crear", "store")->name("guardar.producto");

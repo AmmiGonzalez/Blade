@@ -102,7 +102,7 @@
                             </div>
                         
                             <div class="col-md-6">
-                                <input id="Descuento" min="0" value="0" type="number" class="form-control @error('Descuento') is-invalid @enderror" name="Descuento" value="{{ old('Descuento', $producto->Descuento) }}" required autocomplete="Descuento" autofocus>
+                                <input id="Descuento" min="0" type="number" class="form-control @error('Descuento') is-invalid @enderror" name="Descuento" value="{{ old('Descuento', $producto->Descuento) }}" required autocomplete="Descuento" autofocus>
 
                                 @error('Descuento')
                                     <span class="invalid-feedback" role="alert">

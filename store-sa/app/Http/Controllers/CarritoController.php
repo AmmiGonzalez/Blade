@@ -14,7 +14,9 @@ class CarritoController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except("cotizacion");
+        $this->middleware('auth')->except([
+            'cotizacion', 'deleteItemCotizacion', 'deleteAllCotizacion'
+        ]);
     }
     /**
      * Display a listing of the resource.
@@ -23,12 +25,14 @@ class CarritoController extends Controller
      */
     public function index()
     {
+        if(!session()->has('cart')) session()->put('cart', []);
         return view("Carrito.index", ['carrito' => session()->get('cart')]);
     }
-
+    
     public function cotizacion()
     {
-        return view("Carrito.cotizacion");
+        if(!session()->has('quotation')) session()->put('quotation', []);
+        return view("Carrito.cotizacion", ['cotizacion' => session()->get('quotation')]);
     }
 
     public function pagarCarro()
@@ -127,6 +131,21 @@ class CarritoController extends Controller
         return redirect()->route('pagoExitoso.carrito');
     }
 
+    public function deleteItemCotizacion($itemIndex)
+    {
+        if(session()->has('quotation'))
+        {
+            $cotizacion = session()->get('quotation');
+            if(count($cotizacion) >= 1)
+            {
+                unset($cotizacion[$itemIndex]);
+                session()->put('quotation', array_values($cotizacion));
+                return back()->with('status', "Elemento eliminado correctamente");
+            } else back()->with('status', "No hay elementos en la cotización");
+
+        } else return back()->with('status', "No hay elementos en el cotización");
+    }
+
     public function deleteItem($itemIndex)
     {
         if(session()->has('cart'))
@@ -135,11 +154,17 @@ class CarritoController extends Controller
             if(count($carrito) >= 1)
             {
                 unset($carrito[$itemIndex]);
-                session()->put('cart', $carrito);
+                session()->put('cart', array_values($carrito));
                 return back()->with('status', "Elemento eliminado correctamente");
             } else back()->with('status', "No hay elementos en el carrito");
 
         } else return back()->with('status', "No hay elementos en el carrito");
+    }
+
+    public function deleteAllCotizacion()
+    {
+        session()->put('quotation', []);
+        return back()->with('status', "La lista se vació correctamente");
     }
 
     public function deleteAll()

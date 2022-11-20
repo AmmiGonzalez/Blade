@@ -30,15 +30,28 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <div class="searchContainer">
-                        <input class="form-control me-2" type="search" placeholder="Buscar algún producto" aria-label="Search">
-                        <button class="btn btn-primary"><i class="fa-solid fa-search"></i></button>
+                        <input id="searchInput" class="form-control me-2" type="search" placeholder="Buscar algún producto" aria-label="Search">
+                        <button id="searchButton" class="btn btn-primary"><i class="fa-solid fa-search"></i></button>
+                        <script>
+                            $("#searchInput").on("keypress", function(e) {
+                                if(e.key === "Enter")
+                                {
+                                    event.preventDefault();
+                                    $("#searchButton").click();
+                                }
+                            });
+                            $("#searchButton").on("click", function() {
+                                const url = "/productos/busqueda?page=1&searchBy=" + $("#searchInput")[0].value;
+                                window.location.href = url;
+                            });
+                        </script>
                     </div>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
                         @guest
-                            @if (Route::has('login'))
+                        @if (Route::has('login'))
                                 <li class="nav-item">
                                     <a class="nav-link d-flex flex-row align-items-center justify-content-center" href="{{ route('inicio.cotizacion') }}">
                                         <i class="fa-solid fa-print mx-2"></i>
@@ -80,13 +93,11 @@
                                             <b>{{ Auth::user()->username }}</b>
                                         </h5>
                                     </div>
+                                    <a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ route('inicio.cotizacion') }}">
+                                        <i class="fa-solid fa-print"></i>
+                                        {{ __('Cotización') }}
+                                    </a>
                                     @switch(Auth::user()->IDRol)
-                                        @case(1)
-                                            <a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ route('inicio.cotizacion') }}">
-                                                <i class="fa-solid fa-print"></i>
-                                                {{ __('Cotización') }}
-                                            </a>
-                                            @break
                                         @case(2)
                                             <a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ route('inicio.reportes') }}">
                                                 <i class="fa-solid fa-clipboard-list"></i>
@@ -137,19 +148,19 @@
                         <li class="nav-item dropdown-center mx-2">
                             <a id="dd1" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre><i class="fa-solid fa-microchip mx-1"></i> {{ __("Tecnología") }} </a>
                             <div class="dropdown-menu" aria-labelledby="dd1">
-                                <a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ route('login') }}"> <i class="fa-solid fa-laptop"></i> <p>{{ __('Laptops') }}</p> </a>
-                                <a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ route('login') }}"> <i class="fa-solid fa-computer"></i> <p>{{ __('Computadoras y Accesorios') }}</p> </a>
-                                <a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ route('login') }}"> <i class="fa-solid fa-mobile-screen"></i> <p>{{ __('Celulares y accesorios') }}</p> </a>
-                                <a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ route('login') }}"> <i class="fa-solid fa-print"></i> <p>{{ __('Impresoras, escáneres y suministros') }}</p> </a>
-                                <a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ route('login') }}"> <i class="fa-solid fa-hard-drive"></i> <p>{{ __('Almacenamiento externo') }}</p> </a>
-                                <a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ route('login') }}"> <i class="fa-solid fa-clock"></i> <p>{{ __('Smartwatch\'s y bandas inteligentes') }}</p> </a>
-                                <a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ route('login') }}"> <i class="fa-solid fa-car-battery"></i> <p>{{ __('UPS\'s') }}</p> </a>
-                                <a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ route('login') }}"> <i class="fa-solid fa-ethernet"></i> <p>{{ __('Cables y adaptadores para computadoras') }}</p> </a>
-                                <a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ route('login') }}"> <i class="fa-solid fa-display"></i> <p>{{ __('Monitores para computadora') }}</p> </a>
-                                <a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ route('login') }}"> <i class="fa-solid fa-computer-mouse"></i> <p>{{ __('Mouse\'s') }}</p> </a>
-                                <a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ route('login') }}"> <i class="fa-solid fa-network-wired"></i> <p>{{ __('Redes y conexión inalámbrica') }}</p> </a>
-                                <a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ route('login') }}"> <i class="fa-solid fa-floppy-disk"></i> <p>{{ __('Software') }}</p> </a>
-                                <a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ route('login') }}"> <i class="fa-solid fa-keyboard"></i> <p>{{ __('Teclados') }}</p> </a>
+                                <button data-category="Laptops" class="catButton dropdown-item d-flex align-items-center justify-content-start"> <i class="fa-solid fa-laptop"></i> <p>{{ __('Laptops') }}</p> </button>
+                                <button data-category="Computadoras y Accesorios" class="catButton dropdown-item d-flex align-items-center justify-content-start"> <i class="fa-solid fa-computer"></i> <p>{{ __('Computadoras y Accesorios') }}</p> </button>
+                                <button data-category="Celulares y accesorios" class="catButton dropdown-item d-flex align-items-center justify-content-start"> <i class="fa-solid fa-mobile-screen"></i> <p>{{ __('Celulares y accesorios') }}</p> </button>
+                                <button data-category="Impresoras, escáneres y suministros" class="catButton dropdown-item d-flex align-items-center justify-content-start"> <i class="fa-solid fa-print"></i> <p>{{ __('Impresoras, escáneres y suministros') }}</p> </button>
+                                <button data-category="Almacenamiento externo" class="catButton dropdown-item d-flex align-items-center justify-content-start"> <i class="fa-solid fa-hard-drive"></i> <p>{{ __('Almacenamiento externo') }}</p> </button>
+                                <button data-category="Smartwatch's y bandas inteligentes" class="catButton dropdown-item d-flex align-items-center justify-content-start"> <i class="fa-solid fa-clock"></i> <p>{{ __('Smartwatch\'s y bandas inteligentes') }}</p> </button>
+                                <button data-category="UPS's" class="catButton dropdown-item d-flex align-items-center justify-content-start"> <i class="fa-solid fa-car-battery"></i> <p>{{ __('UPS\'s') }}</p> </button>
+                                <button data-category="Cables y adaptadores para computadoras" class="catButton dropdown-item d-flex align-items-center justify-content-start"> <i class="fa-solid fa-ethernet"></i> <p>{{ __('Cables y adaptadores para computadoras') }}</p> </button>
+                                <button data-category="Monitores para computadora" class="catButton dropdown-item d-flex align-items-center justify-content-start"> <i class="fa-solid fa-display"></i> <p>{{ __('Monitores para computadora') }}</p> </button>
+                                <button data-category="Mouse's" class="catButton dropdown-item d-flex align-items-center justify-content-start"> <i class="fa-solid fa-computer-mouse"></i> <p>{{ __('Mouse\'s') }}</p> </button>
+                                <button data-category="Redes y conexión inalámbrica" class="catButton dropdown-item d-flex align-items-center justify-content-start"> <i class="fa-solid fa-network-wired"></i> <p>{{ __('Redes y conexión inalámbrica') }}</p> </button>
+                                <button data-category="Software" class="catButton dropdown-item d-flex align-items-center justify-content-start"> <i class="fa-solid fa-floppy-disk"></i> <p>{{ __('Software') }}</p> </button>
+                                <button data-category="Teclados" class="catButton dropdown-item d-flex align-items-center justify-content-start"> <i class="fa-solid fa-keyboard"></i> <p>{{ __('Teclados') }}</p> </button>
                             </div>
                         </li>
                         <li class="nav-item dropdown-center mx-2">
@@ -159,10 +170,10 @@
                             </a>
 
                             <div class="dropdown-menu" aria-labelledby="dd2">
-                                <a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ route('login') }}"> <i class="fa-solid fa-tv"></i> <p>{{ __('Televisores') }}</p> </a>
-                                <a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ route('login') }}"> <i class="fa-solid fa-headphones-simple"></i> <p>{{ __('Audífonos') }}</p> </a>
-                                <a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ route('login') }}"> <i class="fa-solid fa-volume-high"></i> <p>{{ __('Bocinas Bluetooth') }}</p> </a>
-                                <a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ route('login') }}"> <i class="fa-solid fa-car-on"></i> <p>{{ __('Auido para carro') }}</p> </a>
+                                <button data-category="Televisores" class="catButton dropdown-item d-flex align-items-center justify-content-start"> <i class="fa-solid fa-tv"></i> <p>{{ __('Televisores') }}</p> </button>
+                                <button data-category="Audífonos" class="catButton dropdown-item d-flex align-items-center justify-content-start"> <i class="fa-solid fa-headphones-simple"></i> <p>{{ __('Audífonos') }}</p> </button>
+                                <button data-category="Bocinas Bluetooth" class="catButton dropdown-item d-flex align-items-center justify-content-start"> <i class="fa-solid fa-volume-high"></i> <p>{{ __('Bocinas Bluetooth') }}</p> </button>
+                                <button data-category="Auido para carro" class="catButton dropdown-item d-flex align-items-center justify-content-start"> <i class="fa-solid fa-car-on"></i> <p>{{ __('Auido para carro') }}</p> </button>
                             </div>
                         </li>
                         
@@ -173,30 +184,51 @@
                             </a>
 
                             <div class="dropdown-menu" aria-labelledby="dd4">
-                                <a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ route('login') }}"> <i class="fa-solid fa-microchip"></i> <p>{{ __('Procesadores') }}</p> </a>
-                                <a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ route('login') }}"> <i class="fa-solid fa-server"></i> <p>{{ __('Unidades de estado sólido (SSD)') }}</p> </a>
-                                <a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ route('login') }}"> <i class="fa-solid fa-headset"></i> <p>{{ __('Audífonos') }}</p> </a>
-                                <a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ route('login') }}"> <i class="fa-solid fa-suitcase-rolling"></i> <p>{{ __('Cases de computadora') }}</p> </a>
-                                <a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ route('login') }}"> <i class="fa-solid fa-gamepad"></i> <p>{{ __('Controles para PC') }}</p> </a>
-                                <a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ route('login') }}"> <i class="fa-solid fa-snowflake"></i> <p>{{ __('Enfriamiento líquido') }}</p> </a>
-                                <a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ route('login') }}"> <i class="fa-solid fa-car-battery"></i> <p>{{ __('Fuentes de poder certificadas') }}</p> </a>
-                                <a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ route('login') }}"> <i class="fa-solid fa-mouse"></i> <p>{{ __('Mouse\'s') }}</p> </a>
-                                <a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ route('login') }}"> <i class="fa-solid fa-hand"></i> <p>{{ __('Mousepads') }}</p> </a>
-                                <a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ route('login') }}"> <i class="fa-solid fa-chess-board"></i> <p>{{ __('Placas madre') }}</p> </a>
-                                <a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ route('login') }}"> <i class="fa-solid fa-desktop"></i> <p>{{ __('Monitores') }}</p> </a>
-                                <a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ route('login') }}"> <i class="fa-solid fa-keyboard"></i> <p>{{ __('Teclados') }}</p> </a>
-                                <a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ route('login') }}"> <i class="fa-solid fa-photo-video"></i> <p>{{ __('Tarjetas de video') }}</p> </a>
+                                <button data-category="Procesadores gaming" class="catButton dropdown-item d-flex align-items-center justify-content-start"> <i class="fa-solid fa-microchip"></i> <p>{{ __('Procesadores') }}</p> </button>
+                                <button data-category="Unidades de estado sólido (SSD) gaming" class="catButton dropdown-item d-flex align-items-center justify-content-start"> <i class="fa-solid fa-server"></i> <p>{{ __('Unidades de estado sólido (SSD)') }}</p> </button>
+                                <button data-category="Audífonos gaming" class="catButton dropdown-item d-flex align-items-center justify-content-start"> <i class="fa-solid fa-headset"></i> <p>{{ __('Audífonos') }}</p> </button>
+                                <button data-category="Cases de computadora gaming" class="catButton dropdown-item d-flex align-items-center justify-content-start"> <i class="fa-solid fa-suitcase-rolling"></i> <p>{{ __('Cases de computadora') }}</p> </button>
+                                <button data-category="Controles para PC gaming" class="catButton dropdown-item d-flex align-items-center justify-content-start"> <i class="fa-solid fa-gamepad"></i> <p>{{ __('Controles para PC') }}</p> </button>
+                                <button data-category="Enfriamiento líquido gaming" class="catButton dropdown-item d-flex align-items-center justify-content-start"> <i class="fa-solid fa-snowflake"></i> <p>{{ __('Enfriamiento líquido') }}</p> </button>
+                                <button data-category="Fuentes de poder certificadas gaming" class="catButton dropdown-item d-flex align-items-center justify-content-start"> <i class="fa-solid fa-car-battery"></i> <p>{{ __('Fuentes de poder certificadas') }}</p> </button>
+                                <button data-category="Mouse's gaming" class="catButton dropdown-item d-flex align-items-center justify-content-start"> <i class="fa-solid fa-mouse"></i> <p>{{ __('Mouse\'s') }}</p> </button>
+                                <button data-category="Mousepads gaming" class="catButton dropdown-item d-flex align-items-center justify-content-start"> <i class="fa-solid fa-hand"></i> <p>{{ __('Mousepads') }}</p> </button>
+                                <button data-category="Placas madre gaming" class="catButton dropdown-item d-flex align-items-center justify-content-start"> <i class="fa-solid fa-chess-board"></i> <p>{{ __('Placas madre') }}</p> </button>
+                                <button data-category="Monitores gaming" class="catButton dropdown-item d-flex align-items-center justify-content-start"> <i class="fa-solid fa-desktop"></i> <p>{{ __('Monitores') }}</p> </button>
+                                <button data-category="Teclados gaming" class="catButton dropdown-item d-flex align-items-center justify-content-start"> <i class="fa-solid fa-keyboard"></i> <p>{{ __('Teclados') }}</p> </button>
+                                <button data-category="Tarjetas de video gaming" class="catButton dropdown-item d-flex align-items-center justify-content-start"> <i class="fa-solid fa-photo-video"></i> <p>{{ __('Tarjetas de video') }}</p> </button>
                             </div>
                         </li>
                     </ul>
                 </div>
+                <script>
+                    $('.catButton').on('click', function(event) {
+                        event.stopPropagation();
+                        event.stopImmediatePropagation();
+                        window.location.href = '/productos/categoria?page=1&categoria=' + $(this).data('category');
+                        //console.log("BUTTON CLICKED: " + $(this).data('category'));
+                    });
+                </script>
             </div>
         </nav>
         <nav class="SearchNavbar navbar navbar-light bg-white shadow-sm">
             <div class="container">
                 <div class="searchContainer">
-                    <input class="form-control me-2" type="search" placeholder="Buscar algún producto" aria-label="Search">
-                    <button class="btn btn-primary"><i class="fa-solid fa-search"></i></button>
+                    <input id="searchInputMobile" class="form-control me-2" type="search" placeholder="Buscar algún producto" aria-label="Search">
+                    <button id="searchButtonMobile" class="btn btn-primary"><i class="fa-solid fa-search"></i></button>
+                    <script>
+                        $("#searchInputMobile").on("keypress", function(e) {
+                            if(e.key === "Enter")
+                            {
+                                event.preventDefault();
+                                $("#searchButtonMobile").click();
+                            }
+                        });
+                        $("#searchButtonMobile").on("click", function() {
+                            const url = "/productos/busqueda?page=1&searchBy=" + $("#searchInputMobile")[0].value;
+                            window.location.href = url;
+                        });
+                    </script>
                 </div>
             </div>
         </nav>

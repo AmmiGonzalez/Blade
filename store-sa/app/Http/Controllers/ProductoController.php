@@ -17,7 +17,7 @@ class ProductoController extends Controller
 {
     public function __construct()
     {
-        $this->middleware("rol:1")->except(["index", "show"]);
+        $this->middleware("rol:1")->except(["index", "show", "addToCart", "searchFor", "searchForCategory"]);
         //else $this->middleware("auth")->except(["index"]);
     }
     /**
@@ -32,6 +32,35 @@ class ProductoController extends Controller
             "marcas" => Marca::all(),
             "categorias" => Categoria::all()
         ]);
+    }
+
+    public function searchFor(Request $request)
+    {
+        if($request->has('searchBy') && $request->has('page'))
+        {
+            $searchBy = $request->query('searchBy');
+            return view('Producto.searchProducto', [
+                'searchFor' => $searchBy,
+                'productos' => Producto::where('Nombre', 'like', '%'.$searchBy.'%')->paginate(20)
+            ]);
+        } else return redirect('productos');
+    }
+
+    public function searchForCategory(Request $request)
+    {
+        if($request->has('categoria') && $request->has('page'))
+        {
+            $categoria = $request->query('categoria');
+            try {
+                $IDCategoria = Categoria::where('Nombre', '=', $categoria)->get()[0]->id;
+            }
+            catch(Exception) { return redirect('productos'); }
+            
+            return view('Producto.searchProductoCat', [
+                'category' => $categoria,
+                'productos' => Producto::where('IDCategoria', '=', $IDCategoria)->paginate(20)
+            ]);
+        } else return redirect('productos');
     }
 
     /**
@@ -103,7 +132,7 @@ class ProductoController extends Controller
     {
         //session()->flush();
         $validated = $request->validate([
-            "IDSucursal" => "required",
+            "IDSucursal" => "",
             "NoProductos" => "required",
         ]);
         /*
@@ -116,7 +145,7 @@ class ProductoController extends Controller
             where('IDProducto', '=', $producto->id)
             ->where('IDSucursal', '=', $request->IDSucursal)->get()[0];
             if($sucursalProducto->Existencia < $request->NoProductos)
-                return back()->with('error', 'Cantidad superior a la existencia');
+            return back()->with('error', 'Cantidad superior a la existencia');
         }
         
         if(!session()->has("cart")) session()->put("cart", []);
