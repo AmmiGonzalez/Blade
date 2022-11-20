@@ -24,7 +24,9 @@ class CategoriaController extends Controller
      */
     public function create()
     {
-        //
+        return view("Categoria.create", [
+            "categoria" => new Categoria()
+        ]);
     }
 
     /**
@@ -35,7 +37,13 @@ class CategoriaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            "Nombre" => "required|min:5|max:250",
+            "Descripcion" => "required|min:5|max:500"
+        ]);
+        Categoria::create($validated);
+
+        return back()->with("status", "Se creó la categoría correctamente");
     }
 
     /**
@@ -57,7 +65,9 @@ class CategoriaController extends Controller
      */
     public function edit(Categoria $categoria)
     {
-        //
+        return view("Categoria.edit", [
+            "categoria" => $categoria
+        ]);
     }
 
     /**
@@ -69,7 +79,14 @@ class CategoriaController extends Controller
      */
     public function update(Request $request, Categoria $categoria)
     {
-        //
+        $validated = $request->validate([
+            "Nombre" => "required|min:5|max:250",
+            "Descripcion" => "required|min:5|max:500"
+        ]);
+
+        $categoria->update($validated);
+
+        return back()->with("status", "Se actualizó la categoría correctamente");
     }
 
     /**
@@ -78,8 +95,9 @@ class CategoriaController extends Controller
      * @param  \App\Models\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Categoria $categoria)
+    public function destroy($id)
     {
-        //
+        $categoria = Categoria::find($id);
+        $categoria->delete();
     }
 }

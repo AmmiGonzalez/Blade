@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ReportesContoller;
 use App\Http\Controllers\RolUsuarioController;
+use App\Http\Controllers\CategoriaController;
 use App\Models\Producto;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -85,4 +86,17 @@ Route::controller(ProductoController::class)->group(function() {
     Route::put("/productos/editar/{producto}", "update")->name("actualizar.producto");
     Route::delete("/productos/eliminar/{id}", "destroy")->name("eliminar.producto");
     Route::get("/productos/{producto}", "show")->name("mostrar.producto");
+});
+
+Route::controller(CategoriaController::class)->group(function(){
+    Route::get("/categorias", "index")->name("ver.categoria");
+
+    Route::get("/categorias/crear", "create")->name("crear.categoria");
+    Route::post("/categorias/crear", "store")->name("guardar.categoria");
+
+    Route::get("/categorias/editar/{categoria}", "edit")->name("editar.categoria");
+    Route::put("/categorias/editar/{categoria}", "update")->name("actualizar.categoria");
+    Route::delete("/categorias/eliminar/{id}", "destroy")->name("eliminar.categoria");
+    Route::get("/categorias/{producto}", "show")->name("mostrar.categoria");
+
 });
