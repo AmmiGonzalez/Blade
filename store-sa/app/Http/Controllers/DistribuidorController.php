@@ -94,7 +94,7 @@ class DistribuidorController extends Controller
 
         $distribuidor->update($validated);
 
-        return back()->with("status", "Se actualizó la categoría correctamente");
+        return back()->with("status", "Se actualizó el distribuidor correctamente");
     }
 
     /**

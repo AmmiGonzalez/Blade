@@ -14,15 +14,15 @@
       [
         'title' => 'Usuarios',
         'cards' => [
-          [ 'route' => 'home', 'icon' => 'user-astronaut', 'title' => 'crear' ],
-          [ 'route' => 'home', 'icon' => 'receipt', 'title' => 'listar' ],
+          //[ 'route' => 'home', 'icon' => 'user-astronaut', 'title' => 'crear' ],
+          [ 'route' => 'ver.usuario', 'icon' => 'receipt', 'title' => 'listar' ],
         ]
       ],
       [
         'title' => 'Roles de usuario',
         'cards' => [
           [ 'route' => 'crear.rol', 'icon' => 'hammer', 'title' => 'crear' ],
-          [ 'route' => 'home', 'icon' => 'receipt', 'title' => 'listar' ],
+          [ 'route' => 'ver.rol', 'icon' => 'receipt', 'title' => 'listar' ],
         ]
       ],
       [

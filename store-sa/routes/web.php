@@ -59,7 +59,7 @@ Route::controller(CarritoController::class)->group(function(){
 Route::controller(RolUsuarioController::class)->group(function(){
     Route::get('/dashboard', 'index')->name('inicio.dashboard');
 
-    Route::get("/roles/index", "index")->name("ver.rol");
+    Route::get("/roles", "roles")->name("ver.rol");
 
     Route::get("/roles/crear", "create")->name("crear.rol");
     Route::post("/roles/crear", "store")->name("guardar.rol");

@@ -58,7 +58,11 @@
                                 {{-- <input id="Marca" type="Marca" class="form-control @error('Marca') is-invalid @enderror" name="Marca" value="{{ old('Marca') }}" required autocomplete="Marca" autofocus> --}}
                                 <select id="IDMunicipio" name="IDMunicipio" class="form-select">
                                     @foreach ($municipios as $municipio)
-                                        <option value="{{$municipio->id}}">{{$municipio->Nombre}}</option>
+                                        <option
+                                        @if ($municipio->id == $sucursal->IDMunicipio)
+                                            selected
+                                        @endif
+                                        value="{{$municipio->id}}">{{$municipio->Nombre}}</option>
                                     @endforeach
                                 </select>
                             </div>

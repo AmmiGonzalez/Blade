@@ -30,6 +30,25 @@
                                 @enderror
                             </div>
                         </div>
+
+                        <div class="row mb-3">
+                            <div class="input-label col-md-4 col-form-label text-md-end">
+                                <i class="fa-solid fa-font"></i>
+                                <label for="Descripcion">{{ __('Descripcion') }}</label>
+                            </div>
+                        
+                            <div class="col-md-6">
+                                <textarea rows="5" id="Descripcion" type="text" class="form-control @error('Descripcion') is-invalid @enderror" name="Descripcion" required autocomplete="Descripcion" autofocus>
+                                    {{ old('Descripcion', $rolUsuario->Descripcion) }}
+                                </textarea>
+
+                                @error('Descripcion')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{$message}}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
                         
                         @if (session("status"))
                             <div class="row my-4">

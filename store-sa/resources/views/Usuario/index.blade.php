@@ -5,44 +5,52 @@
   <div class="container">
     <h3><b>Todas los usuarios</b></h3>
   </div>
-  <div class="row justify-content-center">
-    @foreach ($usuarios as $usuario)
-      <div class="col-md-2 mt-3 mx-3 card" style="width: 18rem;">
-        <a href="/usuarios/{{$usuario->id}}">
-          <div class="img-container">
-            <i class="fa-solid fa-user-astronaut"></i>
+  @if (count($usuarios) >= 1)
+    <div class="row justify-content-center">
+      @foreach ($usuarios as $usuario)
+        <div class="col-md-2 mt-3 mx-3 card" style="width: 18rem;">
+          <a href="/usuarios/{{$usuario->id}}">
+            <div class="img-container">
+              <i class="fa-solid fa-user-astronaut"></i>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title"><b>{{$usuario->username}}</b></h5>
+              <p class="card-text"> {{$usuario->email}} </p>
+            </div>
+          </a>
+          <div class="content-footer mt-auto d-flex flex-row align-items-center justify-content-start">
+            <button onclick="window.location='{{ route('editar.usuario', $usuario) }}'" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></button>
+            <button data-nombre="{{$usuario->username}}" data-id="{{$usuario->id}}" class="btn btn-danger delete" data-bs-toggle="modal" data-bs-target="#dashboardModal"><i class="fa-solid fa-trash-can"></i></button>
           </div>
-          <div class="card-body">
-            <h5 class="card-title"><b>{{$usuario->username}}</b></h5>
-            <p class="card-text"> {{$usuario->email}} </p>
+        </div>
+      @endforeach
+    </div>
+    <div class="modal fade" id="dashboardModal" tabindex="-1" aria-labelledby="dashboardModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="dashboardModalLabel">Eliminar la usuario</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-        </a>
-        <div class="content-footer mt-auto d-flex flex-row align-items-center justify-content-start">
-          <button onclick="window.location='{{ route('editar.usuario', $usuario) }}'" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></button>
-          <button data-nombre="{{$usuario->username}}" data-id="{{$usuario->id}}" class="btn btn-danger delete" data-bs-toggle="modal" data-bs-target="#dashboardModal"><i class="fa-solid fa-trash-can"></i></button>
-        </div>
-      </div>
-    @endforeach
-  </div>
-  <div class="modal fade" id="dashboardModal" tabindex="-1" aria-labelledby="dashboardModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="dashboardModalLabel">Eliminar la usuario</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body d-flex flex-column align-items-center justify-content-center">
-          <i class="fa-solid fa-shapes mr mb-3"></i>
-          <h4>¿Está seguro de eliminar el usuario?</h4>
-          <h4><b class="text-red" id="modalItemName"></b></h4>
-        </div>
-        <div class="modal-footer">
-          <button id="btnDelete" type="button" class="btn btn-danger">Eliminar</button>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <div class="modal-body d-flex flex-column align-items-center justify-content-center">
+            <i class="fa-solid fa-shapes mr mb-3"></i>
+            <h4>¿Está seguro de eliminar el usuario?</h4>
+            <h4><b class="text-red" id="modalItemName"></b></h4>
+          </div>
+          <div class="modal-footer">
+            <button id="btnDelete" type="button" class="btn btn-danger">Eliminar</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+    @else
+    <div class="container d-flex align-items-center justify-content-center w-100 mt-5">
+      <div class="card">
+        <b class="text-red my-3 mx-5">No hay usuarios registrados</b>
+      </div>
+    </div>
+  @endif
 </div>
 <script>
   let selectedProduct;

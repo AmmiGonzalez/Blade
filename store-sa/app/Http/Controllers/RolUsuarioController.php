@@ -18,7 +18,12 @@ class RolUsuarioController extends Controller
      */
     public function index()
     {
-        return view("Dashboard.index",["roles" => RolUsuario::all()]);
+        return view("Dashboard.index");
+    }
+
+    public function roles()
+    {
+        return view("Rol.index", ["roles" => RolUsuario::all()]);
     }
 
     /**
@@ -28,9 +33,7 @@ class RolUsuarioController extends Controller
      */
     public function create()
     {
-        return view("Rol.create", [
-            "rolUsuario" => new RolUsuario()
-        ]);
+        return view("Rol.create");
     }
 
     /**
@@ -42,7 +45,8 @@ class RolUsuarioController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            "Nombre" => "required|min:5|max:250"
+            "Nombre" => "required|min:5|max:250",
+            "Descripcion" => "required",
         ]);
         RolUsuario::create($validated);
 
@@ -84,7 +88,8 @@ class RolUsuarioController extends Controller
     public function update(Request $request, RolUsuario $rolUsuario)
     {
         $validated = $request->validate([
-            "Nombre" => "required|min:5|max:250"
+            "Nombre" => "required|min:5|max:250",
+            "Descripcion" => "required"
         ]);
 
         $rolUsuario->update($validated);
