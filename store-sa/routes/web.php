@@ -10,6 +10,7 @@ use App\Http\Controllers\MarcaController;
 use App\Http\Controllers\DistribuidorController;
 use App\Http\Controllers\SucursalController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\DepartamentoController;
 use App\Models\Producto;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -150,7 +151,20 @@ Route::controller(SucursalController::class)->group(function(){
     Route::get("/sucursales/{sucursal}", "show")->name("mostrar.sucursal");
 });
 
-/* Route::controller(UsuarioController::class)->group(function(){
+Route::controller(DepartamentoController::class)->group(function(){
+    
+    Route::get("/buscarsucursales", "index")->name("ver.buscarsucursal");
+
+   /*  Route::get("/sucursales/crear", "create")->name("crear.sucursal");
+    Route::post("/sucursales/crear", "store")->name("guardar.sucursal");
+
+    Route::get("/sucursales/editar/{sucursal}", "edit")->name("editar.sucursal");
+    Route::put("/sucursales/editar/{sucursal}", "update")->name("actualizar.sucursal");
+    Route::delete("/sucursales/eliminar/{id}", "destroy")->name("eliminar.sucursal");
+    Route::get("/sucursales/{sucursal}", "show")->name("mostrar.sucursal"); */
+});
+
+Route::controller(UsuarioController::class)->group(function(){
     Route::get("/usuarios", "index")->name("ver.usuario");
 
     Route::get("/usuarios/crear", "create")->name("crear.usuario");
@@ -160,4 +174,4 @@ Route::controller(SucursalController::class)->group(function(){
     Route::put("/usuarios/editar/{usuario}", "update")->name("actualizar.usuario");
     Route::delete("/usuarios/eliminar/{id}", "destroy")->name("eliminar.usuario");
     Route::get("/usuarios/{usuario}", "show")->name("mostrar.usuario");
-}); */
+}); 

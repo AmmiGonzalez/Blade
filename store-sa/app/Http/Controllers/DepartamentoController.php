@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Stevebauman\Location\Facades\Location;
 use App\Models\Departamento;
 use Illuminate\Http\Request;
 
@@ -12,9 +12,12 @@ class DepartamentoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    
+    public function index(Request $request)
     {
-        //
+        $ip=$request->ip();
+        $currentUserInfo=Location::get($ip);
+        return view("Departamento.index", ["departamentos" => Departamento::all(), "currentUserInfo"=>$currentUserInfo]);
     }
 
     /**
