@@ -23,10 +23,76 @@
                     <i class="fa-solid fa-basket-shopping"></i>
                 </div>
             @endguest
-            {{-- <div class="warningText defult-bxshadow">
-                <h4><b>Aceptamos únicamente pagos con tarjeta de crédito y débito</b></h4>
-                <i class="fa-solid fa-warning"></i>
-            </div> --}}
+            <script>
+                
+                function getLocation() {
+                  if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(showPosition);
+                  } else {
+                    x.innerHTML = "Geolocation is not supported by this browser.";
+                  }
+                }
+                
+                function showPosition(position) {
+                    @php
+                        $res = json_encode($locations);
+                        echo "var data = $res;\n"
+                    @endphp
+                    console.log(data);
+                    let nombreSucursalCercana = "";
+                    let distancias = [];
+                    for(let coords of data)
+                    {
+                        distancias.push(calcCrow(
+                                parseFloat(coords['lat']),
+                                parseFloat(coords['lon']),
+                                parseFloat(position.coords.latitude),
+                                parseFloat(position.coords.longitude)
+                            )
+                        );
+                        /*console.log("res: ", calcCrow(
+                            parseFloat(coords['lat']),
+                            parseFloat(coords['lon']),
+                            parseFloat(position.coords.latitude),
+                            parseFloat(position.coords.longitude),
+                        ));*/
+                    }
+                    $("#textSucursalMasCercana").text(
+                        "La sucursal más cercana es: " +
+                        data[distancias.indexOf(Math.min.apply(Math, distancias))]['nombre']
+                    )
+                  /*x.innerHTML = "Latitude: " + position.coords.latitude +
+                  "<br>Longitude: " + position.coords.longitude;*/
+                }
+
+                //This function takes in latitude and longitude of two location and returns the distance between them as the crow flies (in km)
+                function calcCrow(lat1, lon1, lat2, lon2) 
+                {
+                    var R = 6371; // km
+                    var dLat = toRad(lat2-lat1);
+                    var dLon = toRad(lon2-lon1);
+                    var lat1 = toRad(lat1);
+                    var lat2 = toRad(lat2);
+
+                    var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                        Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2); 
+                    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+                    var d = R * c;
+                    return d;
+                }
+
+                // Converts numeric degrees to radians
+                function toRad(Value) 
+                {
+                    return Value * Math.PI / 180;
+                }
+
+                getLocation();
+            </script>
+            <div class="warningText defult-bxshadow">
+                <h4><b id="textSucursalMasCercana"></b></h4>
+                <i class="fa-solid fa-map-location-dot"></i>
+            </div>
         </div>
     </header>
     <main>
