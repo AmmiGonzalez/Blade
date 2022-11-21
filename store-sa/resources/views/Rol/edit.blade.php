@@ -16,7 +16,7 @@
                         @csrf
                         <div class="row mb-3">
                             <div class="input-label col-md-4 col-form-label text-md-end">
-                                <i class="fa-solid fa-hashtag"></i>
+                                <i class="fa-solid fa-font"></i>
                                 <label for="Nombre">{{ __('Nombre') }}</label>
                             </div>
                         

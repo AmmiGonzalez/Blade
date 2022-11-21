@@ -16,7 +16,7 @@
 
                         <div class="row mb-3">
                             <div class="input-label col-md-4 col-form-label text-md-end">
-                                <i class="fa-solid fa-hashtag"></i>
+                                <i class="fa-solid fa-font"></i>
                                 <label for="Nombre">{{ __('Nombre') }}</label>
                             </div>
                         
@@ -32,7 +32,7 @@
                         </div>
                         <div class="row mb-3">
                             <div class="input-label col-md-4 col-form-label text-md-end">
-                                <i class="fa-solid fa-font"></i>
+                                <i class="fa-solid fa-envelope"></i>
                                 <label for="Email">{{ __('Email') }}</label>
                             </div>
                         
@@ -48,7 +48,7 @@
                         </div>
                         <div class="row mb-3">
                             <div class="input-label col-md-4 col-form-label text-md-end">
-                                <i class="fa-solid fa-font"></i>
+                                <i class="fa-solid fa-mobile"></i>
                                 <label for="Telefono">{{ __('Teléfono') }}</label>
                             </div>
                         

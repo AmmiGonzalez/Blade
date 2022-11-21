@@ -20,9 +20,13 @@ class SucursalProducto extends Model
         return $this->belongsTo(Sucursal::class, "IDSucursal");
     }
 
-    public function detalle_sucursal_producto()
+    public function producto()
     {
-        return $this->hasMany(detalle_facturas::class, "IDDetalle");
-        return $this->belongsTo(productos::class);
+        return $this->belongsTo(productos::class, "IDProducto");
+    }
+
+    public function detalle_facturas()
+    {
+        return $this->hasMany(DetalleFactura::class, "IDSucursalProducto");
     }
 }
