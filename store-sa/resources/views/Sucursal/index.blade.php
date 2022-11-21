@@ -32,7 +32,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body d-flex flex-column align-items-center justify-content-center">
-          <i class="fa-solid fa-shapes mr mb-3"></i>
+          <i class="fa-solid fa-shop mr mb-3"></i>
           <h4>¿Está seguro de eliminar la sucursal?</h4>
           <h4><b class="text-red" id="modalItemName"></b></h4>
         </div>

@@ -8,7 +8,7 @@
   <div class="row justify-content-center">
     @foreach ($roles as $rol) {{-- De donde saca la variable foreach --}}
       <div class="col-md-2 mt-3 mx-3 card" style="width: 18rem;">
-        <a href="/categorias/{{$rol->id}}">
+        <a href="/roles/{{$rol->id}}">
           <div class="img-container">
             <i class="fa-solid fa-hammer"></i>
           </div>

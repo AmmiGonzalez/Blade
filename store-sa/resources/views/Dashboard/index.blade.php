@@ -21,36 +21,36 @@
       [
         'title' => 'Roles de usuario',
         'cards' => [
-          [ 'route' => 'home', 'icon' => 'hammer', 'title' => 'crear' ],
+          [ 'route' => 'crear.rol', 'icon' => 'hammer', 'title' => 'crear' ],
           [ 'route' => 'home', 'icon' => 'receipt', 'title' => 'listar' ],
         ]
       ],
       [
         'title' => 'Distribuidores',
         'cards' => [
-          [ 'route' => 'home', 'icon' => 'truck', 'title' => 'crear' ],
-          [ 'route' => 'home', 'icon' => 'receipt', 'title' => 'listar' ],
+          [ 'route' => 'crear.distribuidor', 'icon' => 'truck', 'title' => 'crear' ],
+          [ 'route' => 'ver.distribuidor', 'icon' => 'receipt', 'title' => 'listar' ],
         ]
       ],
       [
         'title' => 'Marcas',
         'cards' => [
-          [ 'route' => 'home', 'icon' => 'registered', 'title' => 'crear' ],
-          [ 'route' => 'home', 'icon' => 'receipt', 'title' => 'listar' ],
+          [ 'route' => 'crear.marca', 'icon' => 'registered', 'title' => 'crear' ],
+          [ 'route' => 'ver.marca', 'icon' => 'receipt', 'title' => 'listar' ],
         ]
       ],
       [
         'title' => 'Categorías',
         'cards' => [
-          [ 'route' => 'home', 'icon' => 'shapes', 'title' => 'crear' ],
-          [ 'route' => 'home', 'icon' => 'receipt', 'title' => 'listar' ],
+          [ 'route' => 'crear.categoria', 'icon' => 'shapes', 'title' => 'crear' ],
+          [ 'route' => 'ver.categoria', 'icon' => 'receipt', 'title' => 'listar' ],
         ]
       ],
       [
         'title' => 'Sucursales',
         'cards' => [
-          [ 'route' => 'home', 'icon' => 'shop', 'title' => 'crear' ],
-          [ 'route' => 'home', 'icon' => 'receipt', 'title' => 'listar' ],
+          [ 'route' => 'crear.sucursal', 'icon' => 'shop', 'title' => 'crear' ],
+          [ 'route' => 'ver.sucursal', 'icon' => 'receipt', 'title' => 'listar' ],
         ]
       ],
     ]

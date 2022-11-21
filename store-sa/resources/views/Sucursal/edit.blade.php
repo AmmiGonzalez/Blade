@@ -16,7 +16,7 @@
                         @csrf
                         <div class="row mb-3">
                             <div class="input-label col-md-4 col-form-label text-md-end">
-                                <i class="fa-solid fa-hashtag"></i>
+                                <i class="fa-solid fa-sign-hanging"></i>
                                 <label for="Direccion">{{ __('Dirección') }}</label>
                             </div>
                         
@@ -50,7 +50,7 @@
                         
                         <div class="row mb-3">
                             <div class="input-label col-md-4 col-form-label text-md-end">
-                                <i class="fa-solid fa-clipboard-list"></i>
+                                <i class="fa-solid fa-map-location-dot"></i>
                                 <label for="IDMunicipio">{{ __('Municipios') }}</label>
                             </div>
                         
